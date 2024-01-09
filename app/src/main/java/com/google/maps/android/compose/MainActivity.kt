@@ -125,7 +125,7 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 context.startActivity(Intent(context, CustomControlsActivity::class.java))
                             }) {
-                            Text(getString(R.string.custom_location_button))
+                            Text("Polyline memory leak")
                         }
                         Spacer(modifier = Modifier.padding(5.dp))
                         Button(
