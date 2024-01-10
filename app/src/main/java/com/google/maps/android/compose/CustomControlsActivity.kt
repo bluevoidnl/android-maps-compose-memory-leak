@@ -26,6 +26,13 @@ class CustomControlsActivity : ComponentActivity() {
     private val oceanView = LatLng(4.0, 4.0)
     private val cameraPosition = CameraPosition.fromLatLngZoom(oceanView, 10f)
 
+    private val polyLines = List(700) { y ->
+        List(150) { x ->
+            val zigzag = if (x % 2 == 0) 0.008 else 0.0
+            LatLng( y / 100.0 + zigzag, x / 10.0)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,7 +52,7 @@ class CustomControlsActivity : ComponentActivity() {
                         isMapLoaded = true
                     },
                 ) {
-                    getPolyLines().forEach { points ->
+                    polyLines.forEach { points ->
                         Polyline(
                             points = points,
                             width = 1F,
@@ -70,15 +77,6 @@ class CustomControlsActivity : ComponentActivity() {
                         )
                     }
                 }
-            }
-        }
-    }
-
-    private fun getPolyLines(): List<List<LatLng>> {
-        return List(700) { y ->
-            List(600) { x ->
-                val zigzag = if (x % 2 == 0) 0.002 else 0.0
-                LatLng( y / 100.0 + zigzag, x / 100.0)
             }
         }
     }
